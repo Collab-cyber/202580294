@@ -1,35 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Jean Neekee Gabuat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Travel | Dashboard</title>
+
 </head>
 
 <body>
 
-    <h1>Welcome to My Website</h1>
-    <p>This is Jean's Website</p>
+    <header>
+  
+        <div>
+            ✈️ Smart Travel
+        </div>
 
-    <A href= "index.html"> Home Page</A>
-    <a href= "profile.html"> Profile</a>
-    <a href= "aboutme.html"> About me</a> 
-    <a href= "landing.html"> Landing</a>
-    
+        <nav>
+            <a href="landing.html">Landing</a>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </nav>
 
-    <hr>
+    </header>
 
-    <h2>About This Website</h2>
+    <main>
 
-    <p>
-    Welcome to my personal website! This website was created to share information
-    about myself, including my profile, hobbies, interests, and personal journey.
-    Thank you for taking the time to visit, and I hope you enjoy exploring my website.
-    </p>
+        <section class="dashboard-welcome">
 
+            <p>🌍 YOUR TRAVEL DASHBOARD</p>
+
+            <h1>
+                Plan Your Trip Around the Weather
+            </h1>
+
+            <p>
+                Search your destination to check the current weather
+                and get smart packing recommendations for your trip.
+            </p>
+
+        </section>
+
+        <section class="search-section">
+
+            <h2>
+                Search Your Destination
+            </h2>
+
+            <form id="weatherForm">
+
+                <label for="destination">
+                    Enter a city or destination
+                </label>
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="destination"
+                        placeholder="e.g. Puerto Princesa"
+                        required
+                    >
+
+                    <button type="submit">
+                        🔍 Search
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <section class="weather-section">
+
+            <div class="weather-header">
+
+                <div>
+
+                    <p>
+                        CURRENT WEATHER
+                    </p>
+
+                    <h2 id="location">
+                        Puerto Princesa
+                    </h2>
+
+                </div>
+
+                <span id="weatherDate">
+                    Today
+                </span>
+
+            </div>
+
+
+            <!-- MAIN WEATHER CARD -->
+
+            <div class="weather-card">
+
+                <div class="weather-main">
+
+                    <div class="weather-icon" id="weatherIcon">
+                        ☀️
+                    </div>
+
+                    <div>
+
+                        <h3 id="temperature">
+                            29°C
+                        </h3>
+
+                        <p id="weatherCondition">
+                            Partly Cloudy
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="weather-details">
+
+                    <div>
+                        <span>💧</span>
+                        <p>Humidity</p>
+                        <strong id="humidity">
+                            78%
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>💨</span>
+                        <p>Wind Speed</p>
+                        <strong id="windSpeed">
+                            12 km/h
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>🌡️</span>
+                        <p>Feels Like</p>
+                        <strong id="feelsLike">
+                            31°C
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="packing-section">
+
+            <div class="section-heading">
+
+                <p>
+                    🎒 SMART RECOMMENDATION
+                </p>
+
+                <h2>
+                    What Should You Pack?
+                </h2>
+
+                <p>
+                    Your packing checklist will be generated
+                    based on the weather conditions at your destination.
+                </p>
+
+            </div>
+
+
+            <div class="packing-card">
+
+                <div class="packing-title">
+
+                    <span>
+                        🎒
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Recommended Packing List
+                        </h3>
+
+                        <p id="packingWeather">
+                            Based on current weather conditions
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="packing-list" id="packingList">
+
+                    <label>
+                        <input type="checkbox">
+                        Light and comfortable clothing
+                    </label>
+
+                    <label>
+                        <input type="checkbox">
+                        Comfortable walking shoes
+                    </label>
+
+                    <label>
+                        <input type="checkbox">
+                        Sunglasses
+                    </label>
+
+                    <label>
+                        <input type="checkbox">
+                        Water bottle
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="recent-section">
+
+            <div class="section-heading">
+
+                <p>
+                    🕘 TRAVEL HISTORY
+                </p>
+
+                <h2>
+                    Recent Searches
+                </h2>
+
+            </div>
+
+            <div class="recent-trips" id="recentTrips">
+
+             <!-- Recent searches will be added by JavaScript -->
+
+            </div>
+
+        </section>
+
+        <section class="saved-section">
+
+            <div class="section-heading">
+
+                <p>
+                    ⭐ YOUR TRIPS
+                </p>
+
+                <h2>
+                    Saved Trips
+                </h2>
+
+                <p>
+                    Keep your favorite destinations and packing plans
+                    organized in one place.
+                </p>
+
+            </div>
+
+
+            <div class="saved-empty">
+
+                <div>
+                    ✈️
+                </div>
+
+                <h3>
+                    No saved trips yet
+                </h3>
+
+                <p>
+                    Search a destination and save your trip
+                    for easy access later.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            © 2026 Smart Travel Packing Dashboard
+        </p>
+
+        <p>
+            Web Systems and Technologies Project
+        </p>
+
+    </footer>
 
 
 </body>
 
-
 </html>
-
