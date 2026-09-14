@@ -2,24 +2,26 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - Smart Travel Packing Dashboard</title>
+    <title>PalaTrip | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-    <header>
+    <header class="navbar">
 
-        <div>
-            ✈️ Smart Travel
-        </div>
+        <div class="logo">PalaTrip</div>
 
         <nav>
             <a href="landing.html">Landing</a>
             <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
+            <a href="login.html" class="active">Login</a>
             <a href="register.html">Register</a>
         </nav>
 
@@ -27,23 +29,22 @@
 
     <main>
 
-        <section>
+        <section class="form-section">
 
             <h1>
-                Welcome Back!
+                Welcome Back
             </h1>
 
             <p>
-                Log in to your Smart Travel account
-                and continue planning your trip.
+                Login to your Palawan Go account.
             </p>
 
-            <form>
+            <form action="profile.html">
 
                 <div>
 
                     <label for="email">
-                        Email Address
+                        Email
                     </label>
 
                     <input
@@ -53,9 +54,7 @@
                         placeholder="Enter your email"
                         required
                     >
-
                 </div>
-
 
                 <div>
 
@@ -70,33 +69,7 @@
                         placeholder="Enter your password"
                         required
                     >
-
                 </div>
-
-
-                <div>
-
-                    <input
-                        type="checkbox"
-                        id="remember"
-                        name="remember"
-                    >
-
-                    <label for="remember">
-                        Remember Me
-                    </label>
-
-                </div>
-
-
-                <div>
-
-                    <a href="#">
-                        Forgot Password?
-                    </a>
-
-                </div>
-
 
                 <button type="submit">
                     Login
@@ -104,10 +77,9 @@
 
             </form>
 
-
             <p>
                 Don't have an account?
-                <a href="register.html">Create an Account</a>
+                <a href="register.html">Register here</a>
             </p>
 
         </section>
@@ -116,13 +88,9 @@
 
     <footer>
 
-        <p>
-            © 2026 Smart Travel Packing Dashboard
-        </p>
+        <p>© 2026 PalaTrip</p>
 
-        <p>
-            Web Systems and Technologies Project
-        </p>
+        <p>Web Systems Project</p>
 
     </footer>
 

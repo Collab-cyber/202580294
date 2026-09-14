@@ -2,42 +2,42 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Smart Travel | Dashboard</title>
+    <title>PalaTrip | Home</title>
+
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
-<body>i
-    <header>
-  
-        <div>
-            ✈️ Smart Travel 
-        </div>
+<body>
 
+    <header class="navbar">
+
+        <div class="logo">PalaTrip</div>
+        
         <nav>
             <a href="landing.html">Landing</a>
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="login.html">Login</a>
             <a href="register.html">Register</a>
-        </nav>
-
+        </nav>       
+    
     </header>
 
     <main>
 
-        <section class="dashboard-welcome">
+        <section class="home-intro">
 
-            <p>🌍 YOUR TRAVEL DASHBOARD</p>
-
-            <h1>
-                Plan Your Trip Around the Weather
-            </h1>
-
+            <p class="section-label">EXPLORE PALAWAN</p>
+                
+            <h1>Discover Your Next Destination</h1>
+                
             <p>
-                Search your destination to check the current weather
-                and get smart packing recommendations for your trip.
+                Explore popular places and activities in Palawan.
+                Find information about destinations before your trip.
             </p>
 
         </section>
@@ -45,245 +45,196 @@
         <section class="search-section">
 
             <h2>
-                Search Your Destination
+                Search for a Destination
             </h2>
 
-            <form id="weatherForm">
+            <form>
 
-                <label for="destination">
-                    Enter a city or destination
-                </label>
+                <input
+                    type="text"
+                    placeholder="Search a destination..."
+                >
 
-                <div class="search-box">
-
-                    <input
-                        type="text"
-                        id="destination"
-                        placeholder="e.g. Puerto Princesa"
-                        required
-                    >
-
-                    <button type="submit">
-                        🔍 Search
-                    </button>
-
-                </div>
-
+                <button type="submit">Search</button>
+                    
             </form>
 
         </section>
 
-        <section class="weather-section">
-
-            <div class="weather-header">
-
-                <div>
-
-                    <p>
-                        CURRENT WEATHER
-                    </p>
-
-                    <h2 id="location">
-                        Puerto Princesa
-                    </h2>
-
-                </div>
-
-                <span id="weatherDate">
-                    Today
-                </span>
-
-            </div>
-
-
-            <!-- MAIN WEATHER CARD -->
-
-            <div class="weather-card">
-
-                <div class="weather-main">
-
-                    <div class="weather-icon" id="weatherIcon">
-                        ☀️
-                    </div>
-
-                    <div>
-
-                        <h3 id="temperature">
-                            29°C
-                        </h3>
-
-                        <p id="weatherCondition">
-                            Partly Cloudy
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="weather-details">
-
-                    <div>
-                        <span>💧</span>
-                        <p>Humidity</p>
-                        <strong id="humidity">
-                            78%
-                        </strong>
-                    </div>
-
-
-                    <div>
-                        <span>💨</span>
-                        <p>Wind Speed</p>
-                        <strong id="windSpeed">
-                            12 km/h
-                        </strong>
-                    </div>
-
-
-                    <div>
-                        <span>🌡️</span>
-                        <p>Feels Like</p>
-                        <strong id="feelsLike">
-                            31°C
-                        </strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <section class="packing-section">
+        <section class="activities">
 
             <div class="section-heading">
 
-                <p>
-                    🎒 SMART RECOMMENDATION
+                <p class="section-label">
+                    POPULAR ACTIVITIES
                 </p>
 
                 <h2>
-                    What Should You Pack?
+                    Things to Do in Palawan
                 </h2>
 
                 <p>
-                    Your packing checklist will be generated
-                    based on the weather conditions at your destination.
+                    Discover some activities you can enjoy
+                    during your trip.
                 </p>
 
             </div>
 
+            <div class="activity-container">
 
-            <div class="packing-card">
+                <article class="activity-card">
 
-                <div class="packing-title">
+                    <div class="activity-image"></div>
 
-                    <span>
-                        🎒
-                    </span>
+                    <div class="activity-content">
 
-                    <div>
+                        <h3>Puerto Princesa Underground River</h3>
+                            
+                        <p>
+                            Explore one of Palawan's famous natural
+                            attractions and enjoy a river tour inside
+                            the underground cave.
+                        </p>
+
+                        <p>Puerto Princesa, Palawan</p>
+                            
+                        <p>
+                            ⭐ 4.8 / 5
+                        </p>
+
+                        <a href="#">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </article>
+
+                <article class="activity-card">
+
+                    <div class="activity-image"></div>
+                        
+                    <div class="activity-content">
 
                         <h3>
-                            Recommended Packing List
+                            Island Hopping
                         </h3>
 
-                        <p id="packingWeather">
-                            Based on current weather conditions
+                        <p>
+                            Visit beautiful islands, beaches,
+                            lagoons, and other amazing places
+                            around Palawan.
                         </p>
+
+                        <p>El Nido, Palawan</p>
+
+                        <p>
+                            ⭐ 4.9 / 5
+                        </p>
+
+                        <a href="#">
+                            View Details
+                        </a>
 
                     </div>
 
-                </div>
+                </article>
 
+                <article class="activity-card">
 
-                <div class="packing-list" id="packingList">
+                    <div class="activity-image"></div>
 
-                    <label>
-                        <input type="checkbox">
-                        Light and comfortable clothing
-                    </label>
+                    <div class="activity-content">
 
-                    <label>
-                        <input type="checkbox">
-                        Comfortable walking shoes
-                    </label>
+                        <h3>
+                            Snorkeling
+                        </h3>
 
-                    <label>
-                        <input type="checkbox">
-                        Sunglasses
-                    </label>
+                        <p>
+                            Discover colorful marine life and
+                            enjoy the clear waters of Palawan.
+                        </p>
 
-                    <label>
-                        <input type="checkbox">
-                        Water bottle
-                    </label>
+                        <p>Coron, Palawan</p>
 
-                </div>
+                        <p>
+                            ⭐ 4.7 / 5
+                        </p>
 
-            </div>
+                        <a href="#">
+                            View Details
+                        </a>
 
-        </section>
+                    </div>
 
-        <section class="recent-section">
-
-            <div class="section-heading">
-
-                <p>
-                    🕘 TRAVEL HISTORY
-                </p>
-
-                <h2>
-                    Recent Searches
-                </h2>
-
-            </div>
-
-            <div class="recent-trips" id="recentTrips">
-
-             <!-- Recent searches will be added by JavaScript -->
+                </article>
 
             </div>
 
         </section>
 
-        <section class="saved-section">
+        <section class="destination-info">
 
             <div class="section-heading">
 
-                <p>
-                    ⭐ YOUR TRIPS
+                <p class="section-label">
+                    DESTINATION INFORMATION
                 </p>
 
                 <h2>
-                    Saved Trips
+                    Explore More of Palawan
                 </h2>
-
-                <p>
-                    Keep your favorite destinations and packing plans
-                    organized in one place.
-                </p>
 
             </div>
 
+            <div class="info-container">
 
-            <div class="saved-empty">
+                <article>
 
-                <div>
-                    ✈️
-                </div>
+                    <h3>
+                        El Nido
+                    </h3>
 
-                <h3>
-                    No saved trips yet
-                </h3>
+                    <p>
+                        Known for its beautiful lagoons,
+                        beaches, limestone cliffs, and
+                        island-hopping activities.
+                    </p>
 
-                <p>
-                    Search a destination and save your trip
-                    for easy access later.
-                </p>
+                    <p>Northern Palawan</p>
+
+                </article>
+
+                <article>
+
+                    <h3>
+                        Coron
+                    </h3>
+
+                    <p>
+                        A popular destination known for its
+                        clear waters, islands, lagoons,
+                        and diving spots.
+                    </p>
+
+                    <p>Busuanga Island, Palawan</p>
+
+                </article>
+
+                <article>
+
+                    <h3>
+                        Puerto Princesa
+                    </h3>
+
+                    <p>
+                        The capital city of Palawan and home
+                        to the famous Underground River.
+                    </p>
+
+                    <p>Puerto Princesa, Palawan</p>
+
+                </article>
 
             </div>
 
@@ -293,16 +244,11 @@
 
     <footer>
 
-        <p>
-            © 2026 Smart Travel Packing Dashboard
-        </p>
+        <p>© 2026 PalaTrip</p>
 
-        <p>
-            Web Systems and Technologies Project
-        </p>
+        <p>Web Systems Project</p>
 
     </footer>
-
 
 </body>
 
