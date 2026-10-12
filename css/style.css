@@ -245,3 +245,9 @@ footer {
         width: 90%;
     }
 }
+
+.destination-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
