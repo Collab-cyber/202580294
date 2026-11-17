@@ -10,25 +10,34 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     go('profile.php');
 }
 
+check_csrf('profile.php');
+
 $destination = trim($_POST['destination'] ?? '');
 $activity    = trim($_POST['activity'] ?? '');
 $tripDate    = trim($_POST['trip_date'] ?? '');
 
-// Sent back to the form so the user doesn't retype everything.
-$keep = ['destination' => $destination, 'activity' => $activity, 'trip_date' => $tripDate];
+// Go back to the profile with an error. The typed values are kept in the
+// session (not the URL) so the user doesn't retype everything.
+function back_to_profile($code, array $values)
+{
+    keep_old($values);
+    go('profile.php', ['error' => $code]);
+}
+
+$values = ['destination' => $destination, 'activity' => $activity, 'trip_date' => $tripDate];
 
 if (!in_array($destination, palawan_destinations(), true)) {
-    go('profile.php', ['error' => 'trip_destination'] + $keep);
+    back_to_profile('trip_destination', $values);
 }
 
 if ($activity === '' || str_len($activity) > 100) {
-    go('profile.php', ['error' => 'trip_activity'] + $keep);
+    back_to_profile('trip_activity', $values);
 }
 
 // Must be a real date in YYYY-MM-DD format and not later than today.
 $date = DateTime::createFromFormat('!Y-m-d', $tripDate);
 if (!$date || $date->format('Y-m-d') !== $tripDate || $date > new DateTime('today')) {
-    go('profile.php', ['error' => 'trip_date'] + $keep);
+    back_to_profile('trip_date', $values);
 }
 
 try {
@@ -37,7 +46,8 @@ try {
     );
     $insert->execute([$_SESSION['user_id'], $destination, $activity, $tripDate]);
 } catch (PDOException $ex) {
-    go('profile.php', ['error' => 'server'] + $keep);
+    error_log('PalaTrip add trip error: ' . $ex->getMessage());
+    back_to_profile('server', $values);
 }
 
 go('profile.php', ['trip_added' => 1]);

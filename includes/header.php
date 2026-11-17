@@ -38,7 +38,10 @@ $loggedIn  = is_logged_in();
             <?= nav_link('index.php', 'Home', 'home', $active) ?>
             <?php if ($loggedIn): ?>
                 <?= nav_link('profile.php', 'My Profile', 'profile', $active) ?>
-                <a href="auth/logout.php" class="nav-btn nav-btn-outline">Logout</a>
+                <form class="nav-logout" action="auth/logout.php" method="post">
+                    <?= csrf_field() ?>
+                    <button type="submit">Logout</button>
+                </form>
             <?php else: ?>
                 <?= nav_link('login.php', 'Login', 'login', $active) ?>
                 <?= nav_link('register.php', 'Register', 'register', $active, 'nav-btn') ?>

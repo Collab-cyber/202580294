@@ -21,6 +21,60 @@ function str_len($value)
 }
 
 
+// Clears the session and its cookie (used by logout and when an account no longer exists).
+function end_session()
+{
+    $_SESSION = [];
+    if (ini_get('session.use_cookies')) {
+        $p = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000, $p['path'], $p['domain'], $p['secure'], $p['httponly']);
+    }
+    session_destroy();
+}
+
+// ---------- CSRF protection ----------
+// Every form includes a secret token from the session. A fake form on
+// another website can't know it, so its request gets rejected.
+
+function csrf_token()
+{
+    if (empty($_SESSION['csrf'])) {
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf'];
+}
+
+function csrf_field()
+{
+    return '<input type="hidden" name="csrf" value="' . e(csrf_token()) . '">';
+}
+
+// Used by the auth/ and trips/ handlers. Sends the user back if the token is wrong.
+function check_csrf($backTo)
+{
+    $sent = (string)($_POST['csrf'] ?? '');
+    if (empty($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $sent)) {
+        go($backTo, ['error' => 'csrf']);
+    }
+}
+
+// ---------- Old form values ----------
+// After a failed submit, the typed values are kept in the session (not the URL)
+// so the form can be filled in again. They are read once, then removed.
+
+function keep_old(array $values)
+{
+    $_SESSION['old'] = $values;
+}
+
+function take_old()
+{
+    $old = $_SESSION['old'] ?? [];
+    unset($_SESSION['old']);
+    return $old;
+}
+
+
 // First letter of a name, uppercased. Safe for letters like Ñ or É.
 function first_letter($value)
 {
@@ -94,6 +148,7 @@ function auth_messages()
         'invalid'        => 'Incorrect email or password.',
         'login_required' => 'Please login to view that page.',
         'server'         => 'Something went wrong. Please try again later.',
+        'csrf'           => 'Your session expired. Please try again.',
         'trip_destination' => 'Please choose a destination from the list.',
         'trip_activity'    => 'Please enter an activity (up to 100 characters).',
         'trip_date'        => 'Please enter a valid trip date that is not in the future.',

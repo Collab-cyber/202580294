@@ -5,8 +5,10 @@ guest_only();
 
 $messages  = auth_messages();
 
-$oldName   = (string)($_GET['name'] ?? '');
-$oldEmail  = (string)($_GET['email'] ?? '');
+// Values kept after a failed register, so the user doesn't retype them.
+$old       = take_old();
+$oldName   = (string)($old['name'] ?? '');
+$oldEmail  = (string)($old['email'] ?? '');
 
 $pageTitle = 'PalaTrip | Register';
 $active    = 'register';
@@ -26,6 +28,8 @@ include 'includes/header.php';
             <?php endforeach; ?>
 
             <form action="auth/register.php" method="post">
+
+                <?= csrf_field() ?>
 
                 <div class="field">
                     <label for="name">

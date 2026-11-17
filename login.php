@@ -4,6 +4,8 @@ require_once 'includes/init.php';
 guest_only(); 
 
 $messages  = auth_messages();
+$old       = take_old();
+$oldEmail  = (string)($old['email'] ?? '');
 $pageTitle = 'PalaTrip | Login';
 $active    = 'login';
 include 'includes/header.php';
@@ -27,6 +29,8 @@ include 'includes/header.php';
 
             <form action="auth/login.php" method="post">
 
+                <?= csrf_field() ?>
+
                 <div class="field">
 
                     <label for="email">
@@ -38,6 +42,7 @@ include 'includes/header.php';
                         id="email"
                         name="email"
                         placeholder="Enter your email"
+                        value="<?= e($oldEmail) ?>"
                         autocomplete="email"
                         required
                     >

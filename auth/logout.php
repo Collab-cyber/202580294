@@ -1,11 +1,14 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
 
-$_SESSION = [];
-if (ini_get('session.use_cookies')) {
-    $p = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000, $p['path'], $p['domain'], $p['secure'], $p['httponly']);
+// Logout only works from the Logout button (POST + CSRF token), so another
+// website can't log users out just by linking to this page.
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    go(is_logged_in() ? 'profile.php' : 'login.php');
 }
-session_destroy();
+
+check_csrf('profile.php');
+
+end_session();
 
 go('login.php', ['loggedout' => 1]);

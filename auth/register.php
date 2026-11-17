@@ -5,25 +5,32 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     go('register.php');
 }
 
+check_csrf('register.php');
+
 $name     = trim($_POST['name'] ?? '');
 $email    = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 $confirm  = $_POST['confirm-password'] ?? '';
 
-// Sent back to the form so the user doesn't retype everything.
-$keep = ['name' => $name, 'email' => $email];
+// Go back to the form with an error. Name and email are kept in the session
+// (not the URL) so the user doesn't retype everything.
+function back_to_register($code, $name, $email)
+{
+    keep_old(['name' => $name, 'email' => $email]);
+    go('register.php', ['error' => $code]);
+}
 
 if ($name === '' || str_len($name) > 100) {
-    go('register.php', ['error' => 'name'] + $keep);
+    back_to_register('name', $name, $email);
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 150) {
-    go('register.php', ['error' => 'email'] + $keep);
+    back_to_register('email', $name, $email);
 }
 if (strlen($password) < 8) {
-    go('register.php', ['error' => 'short_password'] + $keep);
+    back_to_register('short_password', $name, $email);
 }
 if ($password !== $confirm) {
-    go('register.php', ['error' => 'mismatch'] + $keep);
+    back_to_register('mismatch', $name, $email);
 }
 
 try {
@@ -31,7 +38,7 @@ try {
     $check->execute([$email]);
 
     if ($check->fetch()) {
-        go('register.php', ['error' => 'exists'] + $keep);
+        back_to_register('exists', $name, $email);
     }
 
     $insert = $conn->prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
@@ -40,9 +47,10 @@ try {
     // 23000 = duplicate key. Happens if someone registered the same email
     // between our SELECT check and this INSERT.
     if ($ex->getCode() == 23000) {
-        go('register.php', ['error' => 'exists'] + $keep);
+        back_to_register('exists', $name, $email);
     }
-    go('register.php', ['error' => 'server'] + $keep);
+    error_log('PalaTrip register error: ' . $ex->getMessage());
+    back_to_register('server', $name, $email);
 }
 
 go('login.php', ['registered' => 1]);

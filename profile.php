@@ -8,7 +8,9 @@ $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
-    redirect('auth/logout.php');
+    // The account no longer exists, so end the session and go to login.
+    end_session();
+    redirect('login.php', ['error' => 'login_required']);
 }
 
 // Only this user's trips, newest first.
@@ -26,10 +28,11 @@ $messages     = auth_messages();
 $destinations = palawan_destinations();
 $today        = date('Y-m-d');
 
-// Values sent back after a failed "Add trip", so the form stays filled in.
-$oldDestination = (string)($_GET['destination'] ?? '');
-$oldActivity    = (string)($_GET['activity'] ?? '');
-$oldDate        = (string)($_GET['trip_date'] ?? '');
+// Values kept after a failed "Add trip", so the form stays filled in.
+$old            = take_old();
+$oldDestination = (string)($old['destination'] ?? '');
+$oldActivity    = (string)($old['activity'] ?? '');
+$oldDate        = (string)($old['trip_date'] ?? '');
 
 $pageTitle = 'PalaTrip | My Profile';
 $active    = 'profile';
@@ -67,7 +70,10 @@ include 'includes/header.php';
                         <?= e($since) ?>
                     </p>
 
-                    <a href="auth/logout.php" class="btn secondary-btn logout-btn">Logout</a>
+                    <form action="auth/logout.php" method="post">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn secondary-btn logout-btn">Logout</button>
+                    </form>
 
                 </div>
 
@@ -86,6 +92,8 @@ include 'includes/header.php';
             <?php endforeach; ?>
 
             <form class="trip-form" action="trips/add.php" method="post">
+
+                <?= csrf_field() ?>
 
                 <h3>Add a Trip</h3>
 
