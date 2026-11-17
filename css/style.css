@@ -101,14 +101,19 @@ img {
     text-decoration: none;
 }
 
+/* "P" monogram (same design as images/favicon.svg) */
 .logo-mark {
     display: inline-grid;
     place-items: center;
     width: 34px;
     height: 34px;
     border-radius: 10px;
-    background: var(--teal-light);
-    font-size: 19px;
+    background: var(--teal);
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1;
 }
 
 .navbar nav {

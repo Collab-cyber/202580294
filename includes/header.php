@@ -14,6 +14,7 @@ $loggedIn  = is_logged_in();
 
     <title><?= e($pageTitle) ?></title>
 
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -25,7 +26,7 @@ $loggedIn  = is_logged_in();
     <header class="navbar">
 
         <a class="logo" href="landing.php">
-            <span class="logo-mark" aria-hidden="true">&#127796;</span>PalaTrip
+            <span class="logo-mark" aria-hidden="true">P</span>PalaTrip
         </a>
 
         <button class="nav-toggle" type="button" aria-label="Toggle navigation"
