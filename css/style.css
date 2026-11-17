@@ -722,6 +722,22 @@ img {
 .act-island  { background: linear-gradient(135deg, #1fa6a0, #3a7bd5); }
 .act-snorkel { background: linear-gradient(135deg, #38b6c9, #1c6ea4); }
 
+/* Activity photo fills the top of the card (the gradient shows while it loads) */
+.activity-image {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.activity-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .activity-content {
     padding: 0 0 22px;
 }

@@ -146,7 +146,9 @@ include 'includes/header.php';
 
                 <article class="activity-card">
 
-                    <div class="activity-image act-cave" aria-hidden="true">&#128758;</div>
+                    <div class="activity-image act-cave">
+                        <img src="images/underground-river.jpg" alt="Boat tour inside the Puerto Princesa Underground River">
+                    </div>
 
                     <div class="activity-content">
 
@@ -168,7 +170,9 @@ include 'includes/header.php';
 
                 <article class="activity-card">
 
-                    <div class="activity-image act-island" aria-hidden="true">&#127965;</div>
+                    <div class="activity-image act-island">
+                        <img src="images/island-hopping.jpg" alt="Island hopping boats in Palawan">
+                    </div>
 
                     <div class="activity-content">
 
@@ -192,7 +196,9 @@ include 'includes/header.php';
 
                 <article class="activity-card">
 
-                    <div class="activity-image act-snorkel" aria-hidden="true">&#129343;</div>
+                    <div class="activity-image act-snorkel">
+                        <img src="images/snorkeling.jpg" alt="Snorkeling in the clear waters of Palawan">
+                    </div>
 
                     <div class="activity-content">
 
