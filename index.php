@@ -1,6 +1,10 @@
 <?php
 require_once 'includes/init.php';
 
+// Destinations come from the database (destinations table).
+$destinations = get_destinations();
+$featured     = array_values(array_filter($destinations, function ($d) { return $d['featured']; }));
+
 $pageTitle = 'PalaTrip | Home';
 $active    = 'home';
 include 'includes/header.php';
@@ -66,55 +70,22 @@ include 'includes/header.php';
 
                 <div class="info-container">
 
-                    <article class="destination-card featured" data-id="el-nido">
+                    <?php foreach ($featured as $place): ?>
+                        <article class="destination-card featured" data-id="<?= e($place['id']) ?>">
 
-                        <div class="destination-image">
-                            <img src="images/el-nido.jpg" alt="El Nido, Palawan">
-                            <span class="badge-popular">&#9733; Popular</span>
-                        </div>
+                            <div class="destination-image">
+                                <img src="<?= e($place['image']) ?>" alt="<?= e($place['name']) ?>, Palawan">
+                                <span class="badge-popular">&#9733; Popular</span>
+                            </div>
 
-                        <h3>El Nido</h3>
+                            <h3><?= e($place['name']) ?></h3>
 
-                        <p>Known for its beautiful lagoons,
-                            beaches, limestone cliffs, and
-                            island-hopping activities.</p>
+                            <p><?= e($place['description']) ?></p>
 
-                        <p class="place-area">&#128205; Northern Palawan</p>
+                            <p class="place-area">&#128205; <?= e($place['area']) ?></p>
 
-                    </article>
-
-                    <article class="destination-card featured" data-id="coron">
-
-                        <div class="destination-image">
-                            <img src="images/coron.jpg" alt="Coron, Palawan">
-                            <span class="badge-popular">&#9733; Popular</span>
-                        </div>
-
-                        <h3>Coron</h3>
-
-                        <p>A popular destination known for its
-                            clear waters, islands, lagoons,
-                            and diving spots.</p>
-
-                        <p class="place-area">&#128205; Busuanga Island, Palawan</p>
-
-                    </article>
-
-                    <article class="destination-card featured" data-id="puerto-princesa">
-
-                        <div class="destination-image">
-                            <img src="images/puerto-princesa.jpg" alt="Puerto Princesa, Palawan">
-                            <span class="badge-popular">&#9733; Popular</span>
-                        </div>
-
-                        <h3>Puerto Princesa</h3>
-
-                        <p>The capital city of Palawan and home
-                            to the famous Underground River.</p>
-
-                        <p class="place-area">&#128205; Puerto Princesa, Palawan</p>
-
-                    </article>
+                        </article>
+                    <?php endforeach; ?>
 
                 </div>
 
@@ -187,8 +158,6 @@ include 'includes/header.php';
 
                         <p class="place-area">&#128205; Puerto Princesa, Palawan</p>
 
-                        <p class="rating">&#11088; 4.8 / 5</p>
-
                         <a href="index.php?q=Puerto%20Princesa#destinations">
                             View Details
                         </a>
@@ -213,8 +182,6 @@ include 'includes/header.php';
 
                         <p class="place-area">&#128205; El Nido, Palawan</p>
 
-                        <p class="rating">&#11088; 4.9 / 5</p>
-
                         <a href="index.php?q=El%20Nido#destinations">
                             View Details
                         </a>
@@ -238,8 +205,6 @@ include 'includes/header.php';
 
                         <p class="place-area">&#128205; Coron, Palawan</p>
 
-                        <p class="rating">&#11088; 4.7 / 5</p>
-
                         <a href="index.php?q=Coron#destinations">
                             View Details
                         </a>
@@ -253,5 +218,10 @@ include 'includes/header.php';
         </section>
 
     </main>
+
+    <!-- Destination data for the search (js/script.js), loaded from the database. -->
+    <script>
+        const DESTINATIONS = <?= json_encode($destinations, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+    </script>
 
 <?php include 'includes/footer.php'; ?>

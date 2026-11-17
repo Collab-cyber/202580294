@@ -18,7 +18,8 @@ PalaTrip also includes a login, registration, and profile page where users can v
 - Login page
 - Registration page
 - User profile
-- Trip history (each user adds and sees only their own trips)
+- Trip history (each user adds, sees and deletes only their own trips)
+- Destinations stored in the database
 
 ## Technologies Used
 
@@ -46,14 +47,14 @@ auth/register.php             Validates the form, saves the user (hashed passwor
 auth/login.php                Checks email + password, starts the session
 auth/logout.php               Ends the session (POST only)
 trips/add.php                 Validates and saves a trip for the logged-in user
+trips/delete.php              Deletes one of the logged-in user's trips
 includes/init.php             Session start, database connection, helper functions
 includes/header.php           Shared <head> + navigation bar (reads the PHP session)
 includes/footer.php           Shared footer + script tags
 config/database.php           PHP configuration (PDO connection to palatrip_db)
-database/palatrip_db.sql      Database schema (users and trips tables)
+database/palatrip_db.sql      Database schema + starting data (users, trips, destinations)
 css/style.css                 All styling (responsive)
-js/destinations.js            List of Palawan destinations used by the search
-js/script.js                  Mobile menu + destination search/filter
+js/script.js                  Mobile menu + destination search/filter (data comes from index.php)
 images/                       Photos of the 3 popular destinations
 ```
 
@@ -62,6 +63,10 @@ images/                       Photos of the 3 popular destinations
 - **users**: `id`, `name`, `email` (unique), `password_hash`, `created_at`
 - **trips**: `id`, `user_id` (foreign key to `users.id`), `destination`, `activity`, `trip_date`, `created_at`.
   Deleting a user also deletes their trips (`ON DELETE CASCADE`).
+- **destinations**: `id` (short code like `el-nido`), `name`, `area`, `category`, `emoji`, `image`,
+  `description`, `activities` (comma-separated), `keywords`, `featured`, `sort_order`.
+  `index.php` loads these rows and passes them to the search as JSON, and the
+  **Add a Trip** dropdown lists the same names.
 
 ### How the login session works
 
@@ -71,7 +76,8 @@ images/                       Photos of the 3 popular destinations
   shows **My Profile / Logout** when logged in and **Login / Register** when not.
 - `profile.php` calls `require_login()`; visitors who are not logged in are
   redirected to `login.php`, even if they type the URL directly.
-- `profile.php` only loads trips where `user_id` matches the logged-in user.
+- `profile.php` only loads trips where `user_id` matches the logged-in user, and
+  `trips/delete.php` only deletes a trip if it belongs to the logged-in user.
 - The user stays logged in until they click **Logout** (`auth/logout.php`).
 
 ### Security
@@ -96,8 +102,13 @@ images/                       Photos of the 3 popular destinations
 
 ### Adding or changing destinations
 
-Edit `js/destinations.js`. Each destination is one block. Put a photo in `images/`
-and set `image: "images/your-photo.jpg"` to replace a "Photo coming soon" placeholder.
+Destinations live in the `destinations` table. In phpMyAdmin, open `palatrip_db` >
+`destinations` > **Insert** (or **Edit** an existing row):
 
-If you add a new destination, also add its name to `palawan_destinations()` in
-`includes/init.php` so it appears in the **Add a Trip** dropdown.
+- `id`: a short code with no spaces, e.g. `long-beach`
+- `activities`: separate them with commas, e.g. `Swimming, Snorkeling`
+- `featured`: `1` shows it in the Popular Destinations cards, `0` puts it under "More to Explore"
+- `image`: put a photo in `images/` and enter `images/your-photo.jpg`, or leave it empty
+  to show the "Photo coming soon" placeholder
+
+The Home page search and the **Add a Trip** dropdown update automatically.

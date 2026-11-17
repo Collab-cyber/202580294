@@ -726,11 +726,6 @@ img {
     padding: 0 0 22px;
 }
 
-.rating {
-    font-weight: 700;
-    color: #8a5a00 !important;
-}
-
 
 .auth-page {
     display: flex;
@@ -1007,6 +1002,39 @@ img {
 
 .trip-history article p.trip-date {
     font-size: 14px;
+}
+
+/* Delete button on each trip card */
+.trip-history article {
+    position: relative;
+}
+
+.trip-delete {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    margin: 0;
+}
+
+.trip-delete button {
+    padding: 6px 12px;
+    border: 1.5px solid #f5c2be;
+    border-radius: 999px;
+    background: var(--white);
+    color: #b3261e;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.trip-delete button:hover {
+    background: #fdecea;
+    border-color: #b3261e;
+}
+
+.trip-history article h3 {
+    padding-right: 90px;
 }
 
 @media (max-width: 700px) {

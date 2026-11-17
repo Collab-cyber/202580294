@@ -15,7 +15,7 @@ if (!$user) {
 
 // Only this user's trips, newest first.
 $tripStmt = $conn->prepare(
-    'SELECT destination, activity, trip_date FROM trips WHERE user_id = ? ORDER BY trip_date DESC, id DESC'
+    'SELECT id, destination, activity, trip_date FROM trips WHERE user_id = ? ORDER BY trip_date DESC, id DESC'
 );
 $tripStmt->execute([$_SESSION['user_id']]);
 $trips = $tripStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -150,6 +150,13 @@ include 'includes/header.php';
 
                 <?php foreach ($trips as $trip): ?>
                     <article>
+
+                        <form class="trip-delete" action="trips/delete.php" method="post"
+                              onsubmit="return confirm('Remove this trip from your history?');">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="trip_id" value="<?= (int)$trip['id'] ?>">
+                            <button type="submit" aria-label="Delete <?= e($trip['destination']) ?> trip">Delete</button>
+                        </form>
 
                         <h3><?= e($trip['destination']) ?></h3>
 

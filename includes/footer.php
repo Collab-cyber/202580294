@@ -18,13 +18,12 @@
                 <?php endif; ?>
             </nav>
 
-            <p class="copyright">&copy; 2026 PalaTrip &middot; Web Systems Project</p>
+            <p class="copyright">&copy; <?= date('Y') ?> PalaTrip &middot; Web Systems Project</p>
 
         </div>
 
     </footer>
 
-    <script src="js/destinations.js"></script>
     <script src="js/script.js"></script>
 
 </body>

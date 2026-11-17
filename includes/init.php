@@ -88,15 +88,33 @@ function first_letter($value)
     return preg_match('/^./u', $value, $m) ? strtoupper($m[0]) : '?';
 }
 
-// Destinations a user can pick when adding a trip (same list as js/destinations.js).
+// All destinations from the database, in display order.
+// Loaded once per page; activities become an array and featured a true/false value.
+function get_destinations()
+{
+    global $conn;
+    static $list = null;
+
+    if ($list === null) {
+        $rows = $conn->query(
+            'SELECT id, name, area, category, emoji, image, description, activities, keywords, featured
+             FROM destinations ORDER BY sort_order, name'
+        )->fetchAll(PDO::FETCH_ASSOC);
+
+        $list = [];
+        foreach ($rows as $row) {
+            $row['activities'] = array_values(array_filter(array_map('trim', explode(',', $row['activities']))));
+            $row['featured']   = (bool)$row['featured'];
+            $list[] = $row;
+        }
+    }
+    return $list;
+}
+
+// Destination names a user can pick when adding a trip.
 function palawan_destinations()
 {
-    return [
-        'El Nido', 'Coron', 'Puerto Princesa', 'Port Barton', 'Nacpan Beach',
-        'Honda Bay', 'Kayangan Lake', 'Twin Lagoon', 'Calauit Safari Park',
-        'Tubbataha Reefs', 'Balabac', 'Apulit Island', 'Taytay (Fort Santa Isabel)',
-        'Ugong Rock', 'Tabon Caves', 'Cuyo Islands',
-    ];
+    return array_column(get_destinations(), 'name');
 }
 
 
@@ -164,6 +182,9 @@ function auth_messages()
     }
     if (!empty($_GET['trip_added'])) {
         $out[] = ['success', 'Trip added to your history!'];
+    }
+    if (!empty($_GET['trip_deleted'])) {
+        $out[] = ['success', 'Trip removed from your history.'];
     }
     if (!empty($_GET['loggedout'])) {
         $out[] = ['success', 'You have been logged out.'];
