@@ -8,12 +8,12 @@ $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
-    // The account no longer exists, so end the session and go to login.
+    
     end_session();
     redirect('login.php', ['error' => 'login_required']);
 }
 
-// Only this user's trips, newest first.
+
 $tripStmt = $conn->prepare(
     'SELECT id, destination, activity, trip_date FROM trips WHERE user_id = ? ORDER BY trip_date DESC, id DESC'
 );
@@ -28,7 +28,7 @@ $messages     = auth_messages();
 $destinations = palawan_destinations();
 $today        = date('Y-m-d');
 
-// Values kept after a failed "Add trip", so the form stays filled in.
+
 $old            = take_old();
 $oldDestination = (string)($old['destination'] ?? '');
 $oldActivity    = (string)($old['activity'] ?? '');

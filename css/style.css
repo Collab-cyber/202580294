@@ -101,7 +101,7 @@ img {
     text-decoration: none;
 }
 
-/* "P" monogram (same design as images/favicon.svg) */
+
 .logo-mark {
     display: inline-grid;
     place-items: center;
@@ -160,7 +160,7 @@ img {
     border-color: var(--teal);
 }
 
-/* Logout is a small form (POST) in the nav, styled like the other nav buttons. */
+
 .nav-logout {
     margin: 0;
 }
@@ -447,7 +447,7 @@ img {
     box-shadow: var(--shadow-hover);
 }
 
-/* the three popular destinations stand out */
+
 .destination-card.featured {
     border: 2px solid var(--sand);
     box-shadow: 0 10px 30px rgba(244, 162, 89, 0.25);
@@ -727,7 +727,7 @@ img {
 .act-island  { background: linear-gradient(135deg, #1fa6a0, #3a7bd5); }
 .act-snorkel { background: linear-gradient(135deg, #38b6c9, #1c6ea4); }
 
-/* Activity photo fills the top of the card (the gradient shows while it loads) */
+
 .activity-image {
     position: relative;
     overflow: hidden;
@@ -955,7 +955,7 @@ img {
 }
 
 
-/* Add a Trip form (profile page) */
+
 .trip-form {
     margin: 18px 0 8px;
     padding: 22px 24px;
@@ -1025,7 +1025,7 @@ img {
     font-size: 14px;
 }
 
-/* Delete button on each trip card */
+
 .trip-history article {
     position: relative;
 }

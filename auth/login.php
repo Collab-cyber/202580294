@@ -10,7 +10,7 @@ check_csrf('login.php');
 $email    = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
-// Go back to the form with an error, keeping the email (never the password).
+
 function back_to_login($code, $email)
 {
     keep_old(['email' => $email]);

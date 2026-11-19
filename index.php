@@ -1,7 +1,6 @@
 <?php
 require_once 'includes/init.php';
 
-// Destinations come from the database (destinations table).
 $destinations = get_destinations();
 $featured     = array_values(array_filter($destinations, function ($d) { return $d['featured']; }));
 
@@ -225,7 +224,6 @@ include 'includes/header.php';
 
     </main>
 
-    <!-- Destination data for the search (js/script.js), loaded from the database. -->
     <script>
         const DESTINATIONS = <?= json_encode($destinations, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     </script>

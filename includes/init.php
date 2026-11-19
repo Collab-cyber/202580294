@@ -21,7 +21,7 @@ function str_len($value)
 }
 
 
-// Clears the session and its cookie (used by logout and when an account no longer exists).
+
 function end_session()
 {
     $_SESSION = [];
@@ -32,9 +32,7 @@ function end_session()
     session_destroy();
 }
 
-// ---------- CSRF protection ----------
-// Every form includes a secret token from the session. A fake form on
-// another website can't know it, so its request gets rejected.
+
 
 function csrf_token()
 {
@@ -49,7 +47,7 @@ function csrf_field()
     return '<input type="hidden" name="csrf" value="' . e(csrf_token()) . '">';
 }
 
-// Used by the auth/ and trips/ handlers. Sends the user back if the token is wrong.
+
 function check_csrf($backTo)
 {
     $sent = (string)($_POST['csrf'] ?? '');
@@ -58,9 +56,7 @@ function check_csrf($backTo)
     }
 }
 
-// ---------- Old form values ----------
-// After a failed submit, the typed values are kept in the session (not the URL)
-// so the form can be filled in again. They are read once, then removed.
+
 
 function keep_old(array $values)
 {
@@ -75,7 +71,7 @@ function take_old()
 }
 
 
-// First letter of a name, uppercased. Safe for letters like Ñ or É.
+
 function first_letter($value)
 {
     $value = trim((string)$value);
@@ -88,8 +84,7 @@ function first_letter($value)
     return preg_match('/^./u', $value, $m) ? strtoupper($m[0]) : '?';
 }
 
-// All destinations from the database, in display order.
-// Loaded once per page; activities become an array and featured a true/false value.
+
 function get_destinations()
 {
     global $conn;
@@ -111,7 +106,7 @@ function get_destinations()
     return $list;
 }
 
-// Destination names a user can pick when adding a trip.
+
 function palawan_destinations()
 {
     return array_column(get_destinations(), 'name');

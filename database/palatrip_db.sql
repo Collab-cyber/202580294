@@ -1,5 +1,4 @@
--- PalaTrip database (MySQL / MariaDB)
--- Import via phpMyAdmin (Import tab) or: mysql -u root < database/palatrip_db.sql
+
 
 SET NAMES utf8mb4;
 
@@ -17,13 +16,11 @@ CREATE TABLE IF NOT EXISTS users (
     created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Make sure an older users table matches what the trips foreign key needs
--- (InnoDB engine + INT UNSIGNED id). Safe to run even if it already matches.
+
 ALTER TABLE users ENGINE=InnoDB;
 ALTER TABLE users MODIFY id INT UNSIGNED NOT NULL AUTO_INCREMENT;
 
--- Each row is one trip in a user's travel history.
--- Deleting a user also deletes their trips (ON DELETE CASCADE).
+
 CREATE TABLE IF NOT EXISTS trips (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id     INT UNSIGNED NOT NULL,
@@ -37,9 +34,7 @@ CREATE TABLE IF NOT EXISTS trips (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- Palawan destinations shown on the Home page search and in the Add a Trip dropdown.
--- activities = comma-separated list. featured = 1 for the "Popular Destinations" cards.
--- sort_order controls the display order (lower comes first).
+
 CREATE TABLE IF NOT EXISTS destinations (
     id          VARCHAR(50)  NOT NULL PRIMARY KEY,
     name        VARCHAR(100) NOT NULL UNIQUE,
@@ -54,8 +49,7 @@ CREATE TABLE IF NOT EXISTS destinations (
     sort_order  INT          NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Starting data. If a row already exists, it is not duplicated; only an
--- empty image is filled in (an image you already set is kept).
+
 INSERT INTO destinations
     (id, name, area, category, emoji, image, description, activities, keywords, featured, sort_order)
 VALUES

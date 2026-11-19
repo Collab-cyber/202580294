@@ -5,7 +5,7 @@ guest_only();
 
 $messages  = auth_messages();
 
-// Values kept after a failed register, so the user doesn't retype them.
+
 $old       = take_old();
 $oldName   = (string)($old['name'] ?? '');
 $oldEmail  = (string)($old['email'] ?? '');

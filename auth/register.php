@@ -12,8 +12,7 @@ $email    = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 $confirm  = $_POST['confirm-password'] ?? '';
 
-// Go back to the form with an error. Name and email are kept in the session
-// (not the URL) so the user doesn't retype everything.
+
 function back_to_register($code, $name, $email)
 {
     keep_old(['name' => $name, 'email' => $email]);

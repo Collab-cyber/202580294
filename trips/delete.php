@@ -1,5 +1,5 @@
 <?php
-// Removes one trip from the logged-in user's history, then goes back to the profile page.
+
 require_once __DIR__ . '/../includes/init.php';
 
 if (!is_logged_in()) {
