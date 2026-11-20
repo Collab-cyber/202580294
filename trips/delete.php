@@ -15,8 +15,7 @@ check_csrf('profile.php');
 $tripId = (int)($_POST['trip_id'] ?? 0);
 
 try {
-    // "AND user_id = ?" makes sure users can only delete their own trips,
-    // even if someone changes the trip_id in the form.
+    
     $delete = $conn->prepare('DELETE FROM trips WHERE id = ? AND user_id = ?');
     $delete->execute([$tripId, $_SESSION['user_id']]);
 } catch (PDOException $ex) {

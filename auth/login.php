@@ -31,12 +31,12 @@ try {
 }
 
 if (!$user || !password_verify($password, $user['password_hash'])) {
-    // Same message for wrong email or wrong password.
+    
     back_to_login('invalid', $email);
 }
 
 session_regenerate_id(true);
 $_SESSION['user_id'] = (int)$user['id'];
-$_SESSION['user_name'] = $user['name']; // shown in the navigation bar
+$_SESSION['user_name'] = $user['name']; 
 
 go('profile.php');

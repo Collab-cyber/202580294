@@ -43,8 +43,7 @@ try {
     $insert = $conn->prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
     $insert->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT)]);
 } catch (PDOException $ex) {
-    // 23000 = duplicate key. Happens if someone registered the same email
-    // between our SELECT check and this INSERT.
+    
     if ($ex->getCode() == 23000) {
         back_to_register('exists', $name, $email);
     }
